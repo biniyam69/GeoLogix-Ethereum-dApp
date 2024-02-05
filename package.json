@@ -1,0 +1,24 @@
+{
+  "name": "geologix",
+  "version": "1.0.0",
+  "description": "Decentralized App that tracks location and gives $GEO tokens to the user who is found at a specific location at a specific time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/biniyam69/GeoLogix-Ethereum-dApp.git"
+  },
+  "keywords": [
+    "dApp",
+    "Ethereum",
+    "$GEO"
+  ],
+  "author": "Biniyam Ajaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/biniyam69/GeoLogix-Ethereum-dApp/issues"
+  },
+  "homepage": "https://github.com/biniyam69/GeoLogix-Ethereum-dApp#readme"
+}
