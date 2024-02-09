@@ -1,7 +1,7 @@
  pragma solidity 0.8.21;
 
  contract Casino {
-    address public owner;
+    address payable public owner;
     uint256 public minimumBet;
     uint256 public totalBet;
     uint256 public numberOfBets;
@@ -19,7 +19,7 @@
     mapping(address => Player) public playerInfo;
 
     constructor (uint256 _minimumBet) {
-        owner = msg.sender;
+        owner = payable(msg.sender);
         if(_minimumBet != 0) minimumBet = _minimumBet;
     }
 
@@ -28,7 +28,7 @@
         selfdestruct(owner);
     }
 
-    function checkPlayerExists(address player) returns(bool){
+    function checkPlayerExists(address player) public returns(bool){
         for (uint i = 0; i < players.length; i++){
             if(players[i] == player) return true;
         }
@@ -59,19 +59,21 @@
     //sends ether to the winners
 
     function distributePrizes(uint256 numberWinner) public {
-        address[100] memory winners; //Create an in memory array with a fixed size
+        address payable[100] memory winners; //Create an in memory array with a fixed size
         uint256 count = 0;
 
         for (uint256 i = 0; i < players.length; i++) {
             address playerAddress = players[i];
             if(playerInfo[playerAddress].numberSelected == numberWinner){
-                winners[count] = playerAddress;
+                winners[count] = payable(playerAddress);
                 count++;
             }
             delete playerInfo[playerAddress];
         }
 
-        players.length = 0;
+        while(players.length > 0) {
+            players.pop();
+        }
 
         uint256 winnerEtherAmount = totalBet / winners.length; // Each winner gets total bet devided by the length of the winner array
 
