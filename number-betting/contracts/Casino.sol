@@ -1,4 +1,4 @@
- pragma solidity 0.8.0;
+ pragma solidity 0.8.21;
 
  contract Casino {
     address public owner;
@@ -18,13 +18,21 @@
 
     mapping(address => Player) public playerInfo;
 
-    function Casino(uint256 _minimumBet) {
+    constructor (uint256 _minimumBet) {
         owner = msg.sender;
         if(_minimumBet != 0) minimumBet = _minimumBet;
     }
 
     function kill() public {
-        if(msg.sender == owner) selfdestruct(owner);
+        if(msg.sender == owner) 
+        selfdestruct(owner);
+    }
+
+    function checkPlayerExists(address player) returns(bool){
+        for (uint i = 0; i < players.length; i++){
+            if(players[i] == player) return true;
+        }
+        return false;
     }
 
     function bet(uint256 numberSelected) public payable {
@@ -69,7 +77,7 @@
 
         for(uint256 j = 0; j < count; j++){
             if(winners[j] != address(0))
-            winners[j].transfer(winnerEtherAmount)
+            winners[j].transfer(winnerEtherAmount);
         }
     }
 }
