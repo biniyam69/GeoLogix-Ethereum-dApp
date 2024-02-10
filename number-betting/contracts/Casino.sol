@@ -1,3 +1,4 @@
+ // SPDX-License-Identifier: MIT
  pragma solidity 0.8.21;
 
  contract Casino {
@@ -19,8 +20,9 @@
     mapping(address => Player) public playerInfo;
 
     constructor (uint256 _minimumBet) {
+        require(_minimumBet > 0, "Min bet must be greater than zero");
         owner = payable(msg.sender);
-        if(_minimumBet != 0) minimumBet = _minimumBet;
+        minimumBet = _minimumBet;
     }
 
     function kill() public {
