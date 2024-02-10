@@ -47,10 +47,9 @@ contract RefundByLocation {
         emit ComplianceChecked(_device, compliant);
     }
     
-    function refund() external {
+    function refund() external view {
         require(!devices[msg.sender].isCompliant, "Device is compliant");
-        // Implement refund logic
-        // Transfer funds to device account
+        
     }
     
     function withdrawFunds() external onlyCreator {
